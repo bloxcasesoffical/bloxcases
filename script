@@ -1,0 +1,28 @@
+// Define rewards and probabilities
+const rewards = [
+  { name: "Legendary Sword", chance: 5 },  // 5%
+  { name: "Golden Shield", chance: 15 },   // 15%
+  { name: "Silver Helm", chance: 30 },     // 30%
+  { name: "Bronze Dagger", chance: 50 }    // 50%
+];
+
+// Function to pick a random reward based on probability
+function getRandomReward() {
+  const random = Math.random() * 100;
+  let cumulativeChance = 0;
+
+  for (const reward of rewards) {
+    cumulativeChance += reward.chance;
+    if (random <= cumulativeChance) {
+      return reward.name;
+    }
+  }
+}
+
+// Event listener for the case click
+const caseElement = document.getElementById("case");
+caseElement.addEventListener("click", () => {
+  const reward = getRandomReward();
+  const rewardElement = document.getElementById("reward");
+  rewardElement.textContent = `🎉 You won: ${reward}!`;
+});
